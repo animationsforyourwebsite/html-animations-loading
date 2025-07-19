@@ -1,0 +1,90 @@
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+  }
+  #outer-container {
+    max-height: 90vh;
+    overflow: auto;
+    font-family: 'Trebuchet MS', sans-serif;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top: 5px solid red;
+    border-radius: 50%;
+    animation: spin 1s linear infinite, colorChange 2s linear infinite;
+    margin: 0 auto;
+  }
+
+  #loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  #loader p {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  @keyframes spin {
+    0%   { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+  }
+  @keyframes colorChange {
+    0%   { border-top-color: red; }
+    50%  { border-top-color: orange; }
+    100% { border-top-color: red; }
+  }
+
+  #main-wrapper {
+    text-align: center;
+    display: none;
+  }
+
+  .fade-out {
+    animation: fadeOut 1s forwards;
+  }
+  .fade-in {
+    animation: fadeIn 1s forwards;
+  }
+  @keyframes fadeOut {
+    to {opacity: 0; visibility: hidden;}
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
+
+<div id="outer-container">
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>Loading, Please Wait</p>
+  </div>
+
+  <div id="main-wrapper">
+    <h2>Welcome to My Google Site!</h2>
+    <p>Enjoy!</p>
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    const main = document.getElementById('main-wrapper');
+    loader.classList.add('fade-out');
+    setTimeout(() => {
+      loader.style.display = 'none';
+      main.style.display = 'block';
+      main.classList.add('fade-in');
+    }, 1000);
+  }, 2000);
+</script>
